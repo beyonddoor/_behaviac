@@ -46,7 +46,8 @@ public class BehaviacSystem
     {
         get
         {
-            string format = UnityTest.UnitTestView.Format;
+            // string format = UnityTest.UnitTestView.Format;
+            string format = "Xml";
 
             if (format == "Xml")
             {

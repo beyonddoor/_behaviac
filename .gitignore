@@ -6,3 +6,4 @@ lib/**
 **/out/**
 !**/out/config.xml
 *.suo
+integration/unity/Assets/Scripts/behaviac/BehaviacUnitTest/Editor/.idea/

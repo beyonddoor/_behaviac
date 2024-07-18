@@ -1649,7 +1649,7 @@ namespace behaviac
             if (this.m_bActive)
             {
 #if !BEHAVIAC_NOT_USE_UNITY
-                UnityEngine.Profiler.BeginSample("btexec");
+                UnityEngine.Profiling.Profiler.BeginSample("btexec");
 #endif
 
 #if !BEHAVIAC_RELEASE
@@ -1671,7 +1671,7 @@ namespace behaviac
                 }
 
 #if !BEHAVIAC_NOT_USE_UNITY
-                UnityEngine.Profiler.EndSample();
+                UnityEngine.Profiling.Profiler.EndSample();
 #endif
 
 #if !BEHAVIAC_RELEASE

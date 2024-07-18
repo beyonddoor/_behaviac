@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--EXPORTED BY TOOL, DON'T MODIFY IT!-->
-<agents version="1" signature="3051046410">
+<agents version="1" signature="1090071246">
   <agent type="AgentNodeTest" base="behaviac::Agent" signature="2154231183">
     <properties>
       <property name="c_ReturnFloat2" type="TestNS::Float2" member="false" static="false" defaultvalue="{x=0;y=0;}" />

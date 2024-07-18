@@ -2750,10 +2750,53 @@ namespace behaviac
 			}
 		}
 
+		private class CMethod_agent_MyPlayer_Move : CAgentMethodVoidBase
+		{
+			CInstanceMember<UnityEngine.Vector3> _pos;
+
+			public CMethod_agent_MyPlayer_Move()
+			{
+			}
+
+			public CMethod_agent_MyPlayer_Move(CMethod_agent_MyPlayer_Move rhs) : base(rhs)
+			{
+			}
+
+			public override IMethod Clone()
+			{
+				return new CMethod_agent_MyPlayer_Move(this);
+			}
+
+			public override void Load(string instance, string[] paramStrs)
+			{
+				Debug.Check(paramStrs.Length == 1);
+
+				_instance = instance;
+				if (paramStrs[0].StartsWith("{"))
+				{
+					_pos = new CInstanceConst_UnityEngine_Vector3("UnityEngine.Vector3", paramStrs[0]);
+				}
+				else
+				{
+					_pos = (CInstanceMember<UnityEngine.Vector3>)AgentMeta.ParseProperty<UnityEngine.Vector3>(paramStrs[0]);
+				}
+			}
+
+			public override void Run(Agent self)
+			{
+				Debug.Check(_pos != null);
+
+				_pos.Run(self);
+				Agent agent = Utils.GetParentAgent(self, _instance);
+
+				((agent.MyPlayer)agent).Move(((CInstanceMember<UnityEngine.Vector3>)_pos).GetValue(self));
+			}
+		}
+
 
 		public override bool Load()
 		{
-			AgentMeta.TotalSignature = 3051046410;
+			AgentMeta.TotalSignature = 1090071246;
 
 			AgentMeta meta;
 
@@ -3527,6 +3570,17 @@ namespace behaviac
 			meta.RegisterMethod(505785840, new CMethod_behaviac_Agent_VectorLength());
 			meta.RegisterMethod(502968959, new CMethod_behaviac_Agent_VectorRemove());
 
+			// agent.MyPlayer
+			meta = new AgentMeta(3349766696);
+			AgentMeta._AgentMetas_[834684317] = meta;
+			meta.RegisterMethod(1045109914, new CAgentStaticMethodVoid<string>(delegate(string param0) { agent.MyPlayer.LogMessage(param0); }));
+			meta.RegisterMethod(3042982998, new CMethod_agent_MyPlayer_Move());
+			meta.RegisterMethod(2521019022, new CMethod_behaviac_Agent_VectorAdd());
+			meta.RegisterMethod(2306090221, new CMethod_behaviac_Agent_VectorClear());
+			meta.RegisterMethod(3483755530, new CMethod_behaviac_Agent_VectorContains());
+			meta.RegisterMethod(505785840, new CMethod_behaviac_Agent_VectorLength());
+			meta.RegisterMethod(502968959, new CMethod_behaviac_Agent_VectorRemove());
+
 			AgentMeta.Register<behaviac.Agent>("behaviac.Agent");
 			AgentMeta.Register<AgentNodeTest>("AgentNodeTest");
 			AgentMeta.Register<ChildNodeTest>("ChildNodeTest");
@@ -3543,6 +3597,7 @@ namespace behaviac
 			AgentMeta.Register<PreconEffectorAgent>("PreconEffectorAgent");
 			AgentMeta.Register<PropertyReadonlyAgent>("PropertyReadonlyAgent");
 			AgentMeta.Register<TestNS.AgentArrayAccessTest>("TestNS.AgentArrayAccessTest");
+			AgentMeta.Register<agent.MyPlayer>("agent.MyPlayer");
 			AgentMeta.Register<EnumTest>("EnumTest");
 			ComparerRegister.RegisterType<EnumTest, CompareValue_EnumTest>();
 			AgentMeta.Register<behaviac.EBTStatus>("behaviac.EBTStatus");
@@ -3602,6 +3657,7 @@ namespace behaviac
 			AgentMeta.UnRegister<PreconEffectorAgent>("PreconEffectorAgent");
 			AgentMeta.UnRegister<PropertyReadonlyAgent>("PropertyReadonlyAgent");
 			AgentMeta.UnRegister<TestNS.AgentArrayAccessTest>("TestNS.AgentArrayAccessTest");
+			AgentMeta.UnRegister<agent.MyPlayer>("agent.MyPlayer");
 			AgentMeta.UnRegister<EnumTest>("EnumTest");
 			AgentMeta.UnRegister<behaviac.EBTStatus>("behaviac.EBTStatus");
 			AgentMeta.UnRegister<FSMAgentTest.EMessage>("FSMAgentTest.EMessage");

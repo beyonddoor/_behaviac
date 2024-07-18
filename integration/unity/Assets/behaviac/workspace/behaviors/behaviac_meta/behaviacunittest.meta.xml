@@ -714,6 +714,11 @@
       <Member Name="Int" DisplayName="Int" Desc="Int" Class="TestNS::AgentArrayAccessTest" Type="int" TypeFullName="System.Int32" defaultvalue="0" Static="false" Public="true" Readonly="false" />
       <Member Name="ListInts" DisplayName="ListInts" Desc="ListInts" Class="TestNS::AgentArrayAccessTest" Type="vector&lt;int&gt;" TypeFullName="System.Collections.Generic.List`1[[System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" defaultvalue="0:" Static="false" Public="true" Readonly="false" />
     </agent>
+    <agent classfullname="agent::MyPlayer" base="behaviac::Agent" DisplayName="agent::MyPlayer" Desc="agent::MyPlayer" IsRefType="true" IsCustomized="true" ExportLocation="../../Resources/behaviac/exported">
+      <Method Name="Move" DisplayName="Move" Desc="Move" Class="agent::MyPlayer" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="true" istask="false">
+        <Param Name="pos" Type="UnityEngine::Vector3" TypeFullName="XMLPluginBehaviac.UnityEngine_Vector3" DisplayName="pos" Desc="pos" />
+      </Method>
+    </agent>
   </agents>
   <instances>
     <instance name="ParTestRegNameAgent" class="ParTestRegNameAgent" DisplayName="ParTestRegNameAgent" Desc="ParTestRegNameAgent" />

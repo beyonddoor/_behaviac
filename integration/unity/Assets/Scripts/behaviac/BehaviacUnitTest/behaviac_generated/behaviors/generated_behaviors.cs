@@ -10,6 +10,63 @@ using System.Reflection;
 
 namespace behaviac
 {
+	// Source file: mytest/test
+
+	[behaviac.GeneratedTypeMetaInfo()]
+	class Action_bt_mytest_test_node1 : behaviac.Action
+	{
+		public Action_bt_mytest_test_node1()
+		{
+			this.m_resultOption = EBTStatus.BT_SUCCESS;
+			method_p0 = new UnityEngine.Vector3();
+			method_p0.x = 0f;
+			method_p0.y = 0f;
+			method_p0.z = 0f;
+		}
+		protected override EBTStatus update_impl(behaviac.Agent pAgent, behaviac.EBTStatus childStatus)
+		{
+			((agent.MyPlayer)pAgent).Move(method_p0);
+			return EBTStatus.BT_SUCCESS;
+		}
+		UnityEngine.Vector3 method_p0;
+	}
+
+	public static class bt_mytest_test
+	{
+		public static bool build_behavior_tree(BehaviorTree bt)
+		{
+			bt.SetClassNameString("BehaviorTree");
+			bt.SetId(-1);
+			bt.SetName("mytest/test");
+			bt.IsFSM = false;
+#if !BEHAVIAC_RELEASE
+			bt.SetAgentType("agent.MyPlayer");
+#endif
+			// children
+			{
+				Sequence node0 = new Sequence();
+				node0.SetClassNameString("Sequence");
+				node0.SetId(0);
+#if !BEHAVIAC_RELEASE
+				node0.SetAgentType("agent.MyPlayer");
+#endif
+				bt.AddChild(node0);
+				{
+					Action_bt_mytest_test_node1 node1 = new Action_bt_mytest_test_node1();
+					node1.SetClassNameString("Action");
+					node1.SetId(1);
+#if !BEHAVIAC_RELEASE
+					node1.SetAgentType("agent.MyPlayer");
+#endif
+					node0.AddChild(node1);
+					node0.SetHasEvents(node0.HasEvents() | node1.HasEvents());
+				}
+				bt.SetHasEvents(bt.HasEvents() | node0.HasEvents());
+			}
+			return true;
+		}
+	}
+
 	// Source file: node_test/fsm/action_ut_1_2
 
 	[behaviac.GeneratedTypeMetaInfo()]
