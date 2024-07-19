@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--EXPORTED BY TOOL, DON'T MODIFY IT!-->
+<!--Source File: mytest\test_moving.xml-->
+<behavior name="mytest/test_moving" agenttype="agent::MyPlayer" version="5">
+  <pars>
+    <par name="tempPos" type="UnityEngine::Vector3" value="{x=0;y=0;z=0;}" />
+  </pars>
+  <node class="Sequence" id="0">
+    <node class="Condition" id="1">
+      <property Operator="NotEqual" />
+      <property Opl="Self.agent::MyPlayer::IsKilled()" />
+      <property Opr="const bool true" />
+    </node>
+    <node class="Assignment" id="3">
+      <property CastRight="false" />
+      <property Opl="UnityEngine::Vector3 Self.agent::MyPlayer::tempPos" />
+      <property Opr="Self.agent::MyPlayer::FindMovingPos()" />
+    </node>
+    <node class="Action" id="2">
+      <property Method="Self.agent::MyPlayer::Move(UnityEngine::Vector3 Self.agent::MyPlayer::tempPos)" />
+      <property ResultOption="BT_SUCCESS" />
+    </node>
+    <node class="Condition" id="4">
+      <property Operator="Equal" />
+      <property Opl="Self.agent::MyPlayer::IsMoving()" />
+      <property Opr="const bool true" />
+    </node>
+  </node>
+</behavior>

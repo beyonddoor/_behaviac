@@ -2796,7 +2796,7 @@ namespace behaviac
 
 		public override bool Load()
 		{
-			AgentMeta.TotalSignature = 1090071246;
+			AgentMeta.TotalSignature = 3385048905;
 
 			AgentMeta meta;
 
@@ -3571,8 +3571,12 @@ namespace behaviac
 			meta.RegisterMethod(502968959, new CMethod_behaviac_Agent_VectorRemove());
 
 			// agent.MyPlayer
-			meta = new AgentMeta(3349766696);
+			meta = new AgentMeta(1116949370);
 			AgentMeta._AgentMetas_[834684317] = meta;
+			meta.RegisterMethod(1215427425, new CAgentMethod<UnityEngine.Vector3>(delegate(Agent self) { return ((agent.MyPlayer)self).FindMovingPos(); }));
+			meta.RegisterMethod(1284197058, new CAgentMethod<bool>(delegate(Agent self) { return ((agent.MyPlayer)self).IsKilled(); }));
+			meta.RegisterMethod(3287572438, new CAgentMethod<bool>(delegate(Agent self) { return ((agent.MyPlayer)self).IsMoving(); }));
+			meta.RegisterMethod(3744992197, new CAgentMethodVoid(delegate(Agent self) { ((agent.MyPlayer)self).Kill(); }));
 			meta.RegisterMethod(1045109914, new CAgentStaticMethodVoid<string>(delegate(string param0) { agent.MyPlayer.LogMessage(param0); }));
 			meta.RegisterMethod(3042982998, new CMethod_agent_MyPlayer_Move());
 			meta.RegisterMethod(2521019022, new CMethod_behaviac_Agent_VectorAdd());

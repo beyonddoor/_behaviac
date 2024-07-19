@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--EXPORTED BY TOOL, DON'T MODIFY IT!-->
+<!--Source File: mytest\fsm.xml-->
+<behavior name="mytest/fsm" agenttype="agent::MyPlayer" fsm="true" version="5">
+  <node class="FSM" id="-1">
+    <property initialid="1" />
+    <node class="State" id="1">
+      <property IsEndState="false" />
+    </node>
+    <node class="State" id="2">
+      <property IsEndState="false" />
+    </node>
+  </node>
+</behavior>

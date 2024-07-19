@@ -10,38 +10,158 @@ using System.Reflection;
 
 namespace behaviac
 {
-	// Source file: mytest/test
+	// Source file: mytest/fsm
 
 	[behaviac.GeneratedTypeMetaInfo()]
-	class Action_bt_mytest_test_node1 : behaviac.Action
+	class State_bt_mytest_fsm_node1 : behaviac.State
 	{
-		public Action_bt_mytest_test_node1()
+		public State_bt_mytest_fsm_node1()
 		{
-			this.m_resultOption = EBTStatus.BT_SUCCESS;
-			method_p0 = new UnityEngine.Vector3();
-			method_p0.x = 0f;
-			method_p0.y = 0f;
-			method_p0.z = 0f;
+			this.m_bIsEndState = false;
 		}
 		protected override EBTStatus update_impl(behaviac.Agent pAgent, behaviac.EBTStatus childStatus)
 		{
-			((agent.MyPlayer)pAgent).Move(method_p0);
-			return EBTStatus.BT_SUCCESS;
+			return behaviac.EBTStatus.BT_RUNNING;
 		}
-		UnityEngine.Vector3 method_p0;
 	}
 
-	public static class bt_mytest_test
+	[behaviac.GeneratedTypeMetaInfo()]
+	class State_bt_mytest_fsm_node2 : behaviac.State
+	{
+		public State_bt_mytest_fsm_node2()
+		{
+			this.m_bIsEndState = false;
+		}
+		protected override EBTStatus update_impl(behaviac.Agent pAgent, behaviac.EBTStatus childStatus)
+		{
+			return behaviac.EBTStatus.BT_RUNNING;
+		}
+	}
+
+	public static class bt_mytest_fsm
 	{
 		public static bool build_behavior_tree(BehaviorTree bt)
 		{
 			bt.SetClassNameString("BehaviorTree");
 			bt.SetId(-1);
-			bt.SetName("mytest/test");
+			bt.SetName("mytest/fsm");
+			bt.IsFSM = true;
+#if !BEHAVIAC_RELEASE
+			bt.SetAgentType("agent.MyPlayer");
+#endif
+			// attachments
+			// children
+			{
+				FSM fsm = new FSM();
+				fsm.SetClassNameString("FSM");
+				fsm.SetId(-1);
+				fsm.InitialId = 1;
+#if !BEHAVIAC_RELEASE
+				fsm.SetAgentType("agent.MyPlayer");
+#endif
+				{
+					State_bt_mytest_fsm_node1 node1 = new State_bt_mytest_fsm_node1();
+					node1.SetClassNameString("State");
+					node1.SetId(1);
+#if !BEHAVIAC_RELEASE
+					node1.SetAgentType("agent.MyPlayer");
+#endif
+					fsm.AddChild(node1);
+					fsm.SetHasEvents(fsm.HasEvents() | node1.HasEvents());
+				}
+				{
+					State_bt_mytest_fsm_node2 node2 = new State_bt_mytest_fsm_node2();
+					node2.SetClassNameString("State");
+					node2.SetId(2);
+#if !BEHAVIAC_RELEASE
+					node2.SetAgentType("agent.MyPlayer");
+#endif
+					fsm.AddChild(node2);
+					fsm.SetHasEvents(fsm.HasEvents() | node2.HasEvents());
+				}
+				bt.AddChild(fsm);
+			}
+			return true;
+		}
+	}
+
+	// Source file: mytest/test_moving
+
+	[behaviac.GeneratedTypeMetaInfo()]
+	class Condition_bt_mytest_test_moving_node1 : behaviac.Condition
+	{
+		public Condition_bt_mytest_test_moving_node1()
+		{
+		}
+		protected override EBTStatus update_impl(behaviac.Agent pAgent, behaviac.EBTStatus childStatus)
+		{
+			bool opl = ((agent.MyPlayer)pAgent).IsKilled();
+			bool opr = true;
+			bool op = opl != opr;
+			return op ? EBTStatus.BT_SUCCESS : EBTStatus.BT_FAILURE;
+		}
+	}
+
+	[behaviac.GeneratedTypeMetaInfo()]
+	class Assignment_bt_mytest_test_moving_node3 : behaviac.Assignment
+	{
+		public Assignment_bt_mytest_test_moving_node3()
+		{
+		}
+		protected override EBTStatus update_impl(behaviac.Agent pAgent, behaviac.EBTStatus childStatus)
+		{
+			EBTStatus result = EBTStatus.BT_SUCCESS;
+			UnityEngine.Vector3 opr = ((agent.MyPlayer)pAgent).FindMovingPos();
+			Debug.Check(behaviac.Utils.MakeVariableId("tempPos") == 872488156u);
+			pAgent.SetVariable<UnityEngine.Vector3>("tempPos", 872488156u, opr);
+			return result;
+		}
+	}
+
+	[behaviac.GeneratedTypeMetaInfo()]
+	class Action_bt_mytest_test_moving_node2 : behaviac.Action
+	{
+		public Action_bt_mytest_test_moving_node2()
+		{
+			this.m_resultOption = EBTStatus.BT_SUCCESS;
+		}
+		protected override EBTStatus update_impl(behaviac.Agent pAgent, behaviac.EBTStatus childStatus)
+		{
+			Debug.Check(behaviac.Utils.MakeVariableId("tempPos") == 872488156u);
+			UnityEngine.Vector3 method_p0 = pAgent.GetVariable<UnityEngine.Vector3>(872488156u);
+			((agent.MyPlayer)pAgent).Move(method_p0);
+			return EBTStatus.BT_SUCCESS;
+		}
+	}
+
+	[behaviac.GeneratedTypeMetaInfo()]
+	class Condition_bt_mytest_test_moving_node4 : behaviac.Condition
+	{
+		public Condition_bt_mytest_test_moving_node4()
+		{
+		}
+		protected override EBTStatus update_impl(behaviac.Agent pAgent, behaviac.EBTStatus childStatus)
+		{
+			bool opl = ((agent.MyPlayer)pAgent).IsMoving();
+			bool opr = true;
+			bool op = opl == opr;
+			return op ? EBTStatus.BT_SUCCESS : EBTStatus.BT_FAILURE;
+		}
+	}
+
+	public static class bt_mytest_test_moving
+	{
+		public static bool build_behavior_tree(BehaviorTree bt)
+		{
+			bt.SetClassNameString("BehaviorTree");
+			bt.SetId(-1);
+			bt.SetName("mytest/test_moving");
 			bt.IsFSM = false;
 #if !BEHAVIAC_RELEASE
 			bt.SetAgentType("agent.MyPlayer");
 #endif
+			// locals
+			bt.AddLocal("agent::MyPlayer", "UnityEngine.Vector3", "tempPos", "{x=0;y=0;z=0;}");
 			// children
 			{
 				Sequence node0 = new Sequence();
@@ -52,14 +172,44 @@ namespace behaviac
 #endif
 				bt.AddChild(node0);
 				{
-					Action_bt_mytest_test_node1 node1 = new Action_bt_mytest_test_node1();
-					node1.SetClassNameString("Action");
+					Condition_bt_mytest_test_moving_node1 node1 = new Condition_bt_mytest_test_moving_node1();
+					node1.SetClassNameString("Condition");
 					node1.SetId(1);
 #if !BEHAVIAC_RELEASE
 					node1.SetAgentType("agent.MyPlayer");
 #endif
 					node0.AddChild(node1);
 					node0.SetHasEvents(node0.HasEvents() | node1.HasEvents());
+				}
+				{
+					Assignment_bt_mytest_test_moving_node3 node3 = new Assignment_bt_mytest_test_moving_node3();
+					node3.SetClassNameString("Assignment");
+					node3.SetId(3);
+#if !BEHAVIAC_RELEASE
+					node3.SetAgentType("agent.MyPlayer");
+#endif
+					node0.AddChild(node3);
+					node0.SetHasEvents(node0.HasEvents() | node3.HasEvents());
+				}
+				{
+					Action_bt_mytest_test_moving_node2 node2 = new Action_bt_mytest_test_moving_node2();
+					node2.SetClassNameString("Action");
+					node2.SetId(2);
+#if !BEHAVIAC_RELEASE
+					node2.SetAgentType("agent.MyPlayer");
+#endif
+					node0.AddChild(node2);
+					node0.SetHasEvents(node0.HasEvents() | node2.HasEvents());
+				}
+				{
+					Condition_bt_mytest_test_moving_node4 node4 = new Condition_bt_mytest_test_moving_node4();
+					node4.SetClassNameString("Condition");
+					node4.SetId(4);
+#if !BEHAVIAC_RELEASE
+					node4.SetAgentType("agent.MyPlayer");
+#endif
+					node0.AddChild(node4);
+					node0.SetHasEvents(node0.HasEvents() | node4.HasEvents());
 				}
 				bt.SetHasEvents(bt.HasEvents() | node0.HasEvents());
 			}

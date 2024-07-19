@@ -1,4 +1,5 @@
 ﻿using agent;
+using behaviac;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -36,7 +37,7 @@ namespace MyTest
         [Category("testMove")]
         public void testMove()
         {
-            testAgent.btsetcurrent("mytest/test");     
+            testAgent.btsetcurrent("mytest/test_moving");     
             behaviac.EBTStatus status = testAgent.btexec();
             behaviac.Debug.Log($"status {status}");
         }

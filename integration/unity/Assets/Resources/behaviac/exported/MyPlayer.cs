@@ -9,35 +9,70 @@ using System.Collections;
 using System.Collections.Generic;
 
 ///<<< BEGIN WRITING YOUR CODE FILE_INIT
+using UnityEngine.AI;
+using UnityEngine;
 
 ///<<< END WRITING YOUR CODE
 
 namespace agent
 {
 ///<<< BEGIN WRITING YOUR CODE NAMESPACE_INIT
-
-///<<< END WRITING YOUR CODE
+    ///<<< END WRITING YOUR CODE
 
 	public class MyPlayer : behaviac.Agent
 ///<<< BEGIN WRITING YOUR CODE MyPlayer
-///<<< END WRITING YOUR CODE
+    ///<<< END WRITING YOUR CODE
 	{
-		public void Move(UnityEngine.Vector3 pos)
+		public UnityEngine.Vector3 FindMovingPos()
 		{
-///<<< BEGIN WRITING YOUR CODE Move
-		behaviac.Debug.Log($"move to {pos}");
+///<<< BEGIN WRITING YOUR CODE FindMovingPos
+			return new UnityEngine.Vector3();
 ///<<< END WRITING YOUR CODE
 		}
 
-///<<< BEGIN WRITING YOUR CODE CLASS_PART
+		public bool IsKilled()
+		{
+///<<< BEGIN WRITING YOUR CODE IsKilled
+            return _killed;
+            ///<<< END WRITING YOUR CODE
+		}
 
-///<<< END WRITING YOUR CODE
+		public bool IsMoving()
+		{
+///<<< BEGIN WRITING YOUR CODE IsMoving
+            return (_targetPos - transform.position).sqrMagnitude >= MIN_DIST * MIN_DIST;
+            ///<<< END WRITING YOUR CODE
+		}
+
+		public void Kill()
+		{
+///<<< BEGIN WRITING YOUR CODE Kill
+            _killed = true;
+            ///<<< END WRITING YOUR CODE
+		}
+
+		public void Move(UnityEngine.Vector3 pos)
+		{
+///<<< BEGIN WRITING YOUR CODE Move
+            _targetPos = pos;
+            behaviac.Debug.Log($"move to {pos}");
+            ///<<< END WRITING YOUR CODE
+		}
+
+///<<< BEGIN WRITING YOUR CODE CLASS_PART
+        public NavMeshAgent _MeshAgent;
+
+        private Vector3 _targetPos;
+        private bool _killed = false;
+
+        private const float MIN_DIST = 0.2f;
+        ///<<< END WRITING YOUR CODE
 
 	}
 
 ///<<< BEGIN WRITING YOUR CODE NAMESPACE_UNINIT
 
-///<<< END WRITING YOUR CODE
+    ///<<< END WRITING YOUR CODE
 }
 
 ///<<< BEGIN WRITING YOUR CODE FILE_UNINIT

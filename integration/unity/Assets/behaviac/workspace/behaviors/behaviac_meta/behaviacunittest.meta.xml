@@ -718,6 +718,10 @@
       <Method Name="Move" DisplayName="Move" Desc="Move" Class="agent::MyPlayer" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="true" istask="false">
         <Param Name="pos" Type="UnityEngine::Vector3" TypeFullName="XMLPluginBehaviac.UnityEngine_Vector3" DisplayName="pos" Desc="pos" />
       </Method>
+      <Method Name="IsMoving" DisplayName="IsMoving" Desc="CheckMoving" Class="agent::MyPlayer" ReturnType="bool" ReturnTypeFullName="System.Boolean" Static="false" Public="true" istask="false" />
+      <Method Name="Kill" DisplayName="Kill" Desc="Kill" Class="agent::MyPlayer" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="true" istask="false" />
+      <Method Name="FindMovingPos" DisplayName="FindMovingPos" Desc="FindMovingPos" Class="agent::MyPlayer" ReturnType="UnityEngine::Vector3" ReturnTypeFullName="XMLPluginBehaviac.UnityEngine_Vector3" Static="false" Public="true" istask="false" />
+      <Method Name="IsKilled" DisplayName="IsKilled" Desc="IsKilled" Class="agent::MyPlayer" ReturnType="bool" ReturnTypeFullName="System.Boolean" Static="false" Public="true" istask="false" />
     </agent>
   </agents>
   <instances>
